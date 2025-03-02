@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website-Ideen Vorschlagen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        section {
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        form input, form textarea, form select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        form button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        form button:hover {
+            background-color: #555;
+        }
+        .whatsapp-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .whatsapp-link a {
+            color: #25D366;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .whatsapp-link a:hover {
+            text-decoration: underline;
+        }
+        .captcha {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Vorschläge für neue Websites</h1>
+</header>
+
+<section>
+    <h2>Teile deine Idee mit mir!</h2>
+    <p>Hast du eine coole Idee für eine Website? Teile sie hier und hilf mir, etwas Neues zu programmieren!</p>
+
+    <form id="suggestion-form" action="https://formspree.io/f/mgvvpoap" method="POST">
+        <label for="name">Dein Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="category">Kategorie</label>
+        <select id="category" name="category" required>
+            <option value="">Wähle eine Kategorie</option>
+            <option value="E-Commerce">E-Commerce</option>
+            <option value="Portfolio">Portfolio</option>
+            <option value="Blog">Blog</option>
+            <option value="Social Media">Social Media</option>
+            <option value="Bildung">Bildung</option>
+            <option value="Unterhaltung">Unterhaltung</option>
+            <option value="Dienstleistungen">Dienstleistungen</option>
+            <option value="Anderes">Anderes</option>
+        </select>
+
+        <label for="idea">Deine Website-Idee</label>
+        <textarea id="idea" name="message" rows="4" required></textarea>
+
+        <!-- CAPTCHA -->
+        <div class="captcha">
+            <label for="captcha-answer" id="captcha-question"></label>
+            <input type="text" id="captcha-answer" name="captcha-answer" required>
+        </div>
+
+        <button type="submit">Absenden</button>
+    </form>
+
+    <div class="whatsapp-link">
+        <p>Um auf dem Laufenden zu bleiben, abonniere meinen WhatsApp Kanal:</p>
+        <a href="https://whatsapp.com/channel/0029VaCtSGcAInPtGdnvIg1h" target="_blank">Jetzt abonnieren</a>
+    </div>
+</section>
+
+<script>
+    // Zufällige Additionsaufgabe generieren
+    function generateCaptcha() {
+        const num1 = Math.floor(Math.random() * 10) + 1; // Zahl zwischen 1 und 10
+        const num2 = Math.floor(Math.random() * 10) + 1; // Zahl zwischen 1 und 10
+        const question = `Was ist ${num1} + ${num2}?`; // Addition
+        const answer = num1 + num2; // Antwort auf die Addition
+
+        // Setze die Frage und speichere die Antwort
+        document.getElementById('captcha-question').textContent = question;
+        document.getElementById('suggestion-form').onsubmit = function(event) {
+            const userAnswer = parseInt(document.getElementById('captcha-answer').value, 10);
+            if (userAnswer !== answer) {
+                event.preventDefault();
+                alert("Die Antwort auf die Rechenaufgabe ist falsch. Bitte versuche es noch einmal.");
+            }
+        };
+    }
+
+    // Beim Laden der Seite die CAPTCHA-Aufgabe generieren
+    window.onload = generateCaptcha;
+</script>
+
+</body>
+</html>
